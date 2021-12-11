@@ -6,8 +6,8 @@ const pollService = new PollService()
 
 
 router.get('/get', async (req, res) => {
-  const contestants = await pollService.getContestants()
-  res.json(contestants)
+  const candidates = await pollService.getCandidates()
+  res.json(candidates)
 })
 
 router.patch('/vote/:id', async (req, res) => {

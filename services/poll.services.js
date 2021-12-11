@@ -4,47 +4,47 @@ const faker = require('faker')
 class PollService {
 
   constructor() {
-    this.contestants = []
-    this.initContestants()
+    this.candidates = []
+    this.initCandidates()
   }
 
-  initContestants() {
-    let { contestants } = data;
-    contestants = contestants.map((contestant) => {
+  initCandidates() {
+    let { candidates } = data;
+    candidates = candidates.map((candidates) => {
       return {
-        ...contestant,
+        ...candidates,
         id: faker.datatype.uuid()
       }
     })
-    this.contestants = contestants
+    this.candidates = candidates
   }
 
-  async getContestants() {
-    return this.contestants
+  async getCandidates() {
+    return this.candidates
   }
 
-  async vote(contestantId, vote) {
-    const id = this.searchById(contestantId)
+  async vote(candidateId, vote) {
+    const id = this.searchById(candidateId)
     if(id >= 0) {
-      let { votes } = this.contestants[id]
+      let { votes } = this.candidates[id]
       if(vote === 'up') {
         votes.positive++
       } else {
         votes.negative++
       }
-      this.contestants[id] = {
-        ...this.contestants[id],
+      this.candidates[id] = {
+        ...this.candidates[id],
         votes,
       }
-      return this.contestants[id]
+      return this.candidates[id]
     }
     else {
-      throw new Error('Contestant id not found')
+      throw new Error('Candidate id not found')
     }
   }
 
   searchById(id) {
-    return this.contestants.findIndex((contestant) => contestant.id === id)
+    return this.candidates.findIndex((candidate) => candidate.id === id)
   }
 
 }
